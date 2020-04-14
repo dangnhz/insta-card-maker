@@ -21,6 +21,10 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+a {
+  color: white;
+  text-decoration: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

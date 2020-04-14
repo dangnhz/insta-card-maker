@@ -68,7 +68,8 @@
         </svg>
       </div>
       <h1>InstaCard Maker</h1>
-      <p>Developed by Danny Ngo</p>
+      <p>Developed by <a href="https://www.facebook.com/dang.nhz" target="_blank">Danny Ngo</a></p>
+      <p>Inspired by <a href="https://www.facebook.com/groups/jbrteam" target="_blank">JBR-Team</a></p>
     </div>
     <div class="form-input">
       <label for="url-input"></label>
@@ -239,21 +240,20 @@ export default {
   width: 100%;
   background: white;
   .page-tilte {
-    padding-top: 3rem;
+    padding: 2rem 0;
     margin-bottom: 5rem;
     width: 100%;
-    height: 300px;
     color: white;
     background: rgba(248, 14, 92, 1);
     .insta-icon{
       margin: 0 auto;
-      width: 5rem;
-      height: 5rem;
+      width: 4rem;
+      height: 4rem;
       fill: white;
     }
     h1{
-      margin-top: 2rem;
-      font-size: 4rem;
+      margin-top: 1rem;
+      font-size: 3.5rem;
       @media @mobile, @large-mobile {
         font-size: 2rem;
       }
