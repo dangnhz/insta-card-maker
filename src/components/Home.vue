@@ -92,7 +92,9 @@
     <HiddenCard :user="user"></HiddenCard>
     <LightBox v-if="showLightBox" :imageUrl="resultImage" @close-lightbox="onCloseLightBox"></LightBox>
 
-    <div id="result" @click="onShowLightBox"></div>
+    <div id="result">
+      <div id="final-image" @click="onShowLightBox"></div>
+    </div>
   </div>
 </template>
 
@@ -131,7 +133,7 @@ export default {
       else this.disabled = true;
     },
    async generateCard() {
-      document.getElementById("result").innerHTML = "";
+      document.getElementById("final-image").innerHTML = "";
       let apiUrl = this.getApiUrl(this.postUrl);
       
       if(!apiUrl) return
@@ -222,12 +224,23 @@ export default {
         scale: 1
       }).then(canvas => {
         const result = document.getElementById("result");
-        result.innerHTML = "";
+        const finalImage = document.getElementById("final-image")
+        finalImage.innerHTML = "";
         let image = new Image();
         image.src = canvas.toDataURL("image/jpeg", 1);
         this.resultImage = image.src;
         image.setAttribute("class", "result-image");
-        result.appendChild(image);
+        finalImage.appendChild(image);
+        // create download button
+        //  let download = `<a id='download-btn' href='${image.src}' download='insta-card.jpg'>Download</a>`
+        //  result.innerHTML += download 
+        let download = document.createElement("a")
+        download.setAttribute("id", "download-btn")
+        download.setAttribute("href", image.src)
+        download.setAttribute("download", "insta-card.jpg")
+        download.innerText= "download"
+        result.appendChild(download)
+        
       });
     }
   }
@@ -253,7 +266,7 @@ export default {
     }
     h1{
       margin-top: 1rem;
-      font-size: 3.5rem;
+      font-size: 4rem;
       @media @mobile, @large-mobile {
         font-size: 2rem;
       }
@@ -337,6 +350,8 @@ export default {
   }
   #result {
     margin: 5rem auto;
+    position: relative;
+    z-index: 999;
     width: 50%;
     cursor: zoom-in;
     @media @mobile, @large-mobile, @tablet {
@@ -346,6 +361,23 @@ export default {
       width: 100%;
       height: 100%;
       // border: 1px solid white;
+    }
+    #download-btn {
+      display: block;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+      height: fit-content;
+      width: 150px;
+      margin: 2rem auto;
+      letter-spacing: 3px;
+      transition: all 0.5s !important;
+      background: white;
+      color: black;
+      border: 1px solid rgb(185, 185, 185);
+      &:hover {
+        border: 1px solid rgb(0, 140, 255);
+        color: rgb(0, 140, 255);
+      }
     }
   }
 }
