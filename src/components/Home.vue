@@ -94,6 +94,7 @@
 
     <div id="result">
       <div id="final-image" @click="onShowLightBox"></div>
+      <div id="download-button"></div>
     </div>
   </div>
 </template>
@@ -134,6 +135,7 @@ export default {
     },
    async generateCard() {
       document.getElementById("final-image").innerHTML = "";
+      document.getElementById("download-button").innerHTML = "";
       let apiUrl = this.getApiUrl(this.postUrl);
       
       if(!apiUrl) return
@@ -223,9 +225,8 @@ export default {
         height: 1200,
         scale: 1
       }).then(canvas => {
-        const result = document.getElementById("result");
+        const downloadButton = document.getElementById("download-button");
         const finalImage = document.getElementById("final-image")
-        finalImage.innerHTML = "";
         let image = new Image();
         image.src = canvas.toDataURL("image/jpeg", 1);
         this.resultImage = image.src;
@@ -239,7 +240,7 @@ export default {
         download.setAttribute("href", image.src)
         download.setAttribute("download", "insta-card.jpg")
         download.innerText= "download"
-        result.appendChild(download)
+        downloadButton.appendChild(download)
         
       });
     }
@@ -370,7 +371,7 @@ export default {
       width: 150px;
       margin: 2rem auto;
       letter-spacing: 3px;
-      transition: all 0.5s !important;
+      transition: all 0.8s !important;
       background: white;
       color: black;
       border: 1px solid rgb(185, 185, 185);
